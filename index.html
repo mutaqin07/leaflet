@@ -28,6 +28,28 @@
 
   <body>
     <div id='map'></div>
+    <input type="text" id="txtLong" />
+    <input type="text" id="txtLat" />
+    <script type='text/javascript'>
+      const getGeocoding = async (position) => {
+            console.log(position.coords.longitude);
+            console.log(position.coords.latitude);
+            $('#txtLong').val(position.coords.longitude);
+            $('#txtLat').val(position.coords.latitude);
+        };
+      var options = {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 0
+        };
+
+        function error(err) {
+            console.log(err);
+        }
+      $(document).ready(function(){
+        await navigator.geolocation.getCurrentPosition(getGeocoding, error, options);
+      });
+    </script>
     <script type='text/javascript' src='maps/markers.js'></script>
     <script type='text/javascript' src='maps/leaf-demo.js'></script>
   </body>
